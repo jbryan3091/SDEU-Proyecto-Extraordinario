@@ -1,0 +1,9 @@
+# ngrok start -config config.yml --all
+authtoken: DjYpSETTNnqfNUfJtSaL_6DE5YG4MT8eNZjjsCkPAe
+tunnels:
+  http:
+    proto: http
+    addr: 3001
+  tcp:
+    proto: tcp
+    addr: 3000

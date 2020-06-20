@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>SDEU</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <v-app>
+            <v-main>
+                <v-container>
+                    <v-card class="mx-auto" max-width="800">
+                        <v-card-text>
+                            <v-row align="center" justify="center">
+                                <v-col class="display-3" cols="6">
+                                    {{ message }}
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-switch inset v-model="light" label="Light" color="red" hide-details>
+                                    </v-switch>
+                                </v-col>
+                            </v-row>
+                        </v-card-text>
+                    </v-card>
+                </v-container>
+            </v-main>
+        </v-app>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var socket = io();
+    var app = new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        data: {
+            message: '0',
+            light: true,
+        },
+        mounted() {
+            this.getRealtimeData();
+        },
+        methods: {
+            update(value) {
+                console.log(value);
+                this.message = value;
+            },
+            getRealtimeData() {
+                socket.on("potentiometer", msg => {
+                    var enc = new TextDecoder("utf-8");
+                    this.update(enc.decode(msg));
+                })
+            },
+        },
+        watch: {
+            light(val) {
+                socket.emit('light', val);
+            }
+        },
+    });
+</script>
+<style>
+    html,
+    body {
+        margin: 5px;
+        padding: 0;
+    }
+</style>
