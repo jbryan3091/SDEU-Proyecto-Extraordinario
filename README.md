@@ -1,0 +1,3 @@
+# SDEU-Proyecto-Extraordinario
+Mediante el siguiente proyecto se busca monitorizar vía web, la información leída desde un potenciómetro, conectado a una mbed LPC1768, es decir, enviar los valores de lectura de nuestro potenciómetro a un servidor web, para que este los muestre al ser consultados por un navegador y teniendo un botón que nos permita apagar o encender un Led del mbed, basándonos en las librerías que dispone mbed, se han utilizan las siguientes librerías: 
+"NetworkInterface.h", "TCPSocket.h" y  "http_request.h", por otro lado se ha utilizado nodejs, para el servidor http y vuejs para la interfaz web.
