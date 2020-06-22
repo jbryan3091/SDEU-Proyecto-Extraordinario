@@ -33,7 +33,7 @@
         printf("MAC address: %s\n", mac ? mac : "None");
         printf("Gateway: %s\n", gateway ? gateway : "None");
 
-        // Generamos la conexion de socket TCP
+        // Generamos la conexion de socket TCP *SE DEBE CAMBIAR EL PUERTO AL GENERAR EL LA CONEXION TCP 
 
         TCPSocket socket;
         socket.open(net);
@@ -42,7 +42,7 @@
         while(1) {
             // Hacemos un HttpRequest a nuestro servidor para obtener el valor del Led
             {
-            
+                // SE DEBE CAMBIAR LA RUTA DE LA API SEGUN SEA GENERADA
                 HttpRequest* get_req = new HttpRequest(net, HTTP_GET, "http://3e68cbb3a2c4.ngrok.io/api/light");
         
                 HttpResponse* get_res = get_req->send();
